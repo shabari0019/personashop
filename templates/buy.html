@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>PersonaShop</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+		<noscript><link rel="stylesheet" href="{{url_for('static',filename='css/noscript.css')}}" /></noscript>
+		<link rel="stylesheet" href="{{ url_for('static',filename='css/main.css')}}" />
+      <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+
+  .product {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+  }
+
+  .product img {
+    max-width: 200px;
+    max-height: 200px;
+    margin-right: 20px;
+  }
+
+  .product-details {
+    flex: 1;
+  }
+
+  .product-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 10px;
+  }
+
+  .product-description {
+    margin-bottom: 10px;
+  }
+
+  .product-specs {
+    margin-bottom: 10px;
+  }
+
+  .buy-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+
+<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+                        <div class="inner">
+
+                        <a href="index.html" class="logo">
+									<span class="symbol"><img src="{{ url_for('static',filename='images/shopping.svg')}}" alt="" /></span><span class="title">PersonaShop</span>
+								</a>
+                      <nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+                            </div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="{{url_for('home')}}">Home</a></li>
+							<li><a href="{{url_for('display',name = 'Male')}}">Men</a></li>
+							<li><a href="{{url_for('display',name = 'Female')}}">Women</a></li>
+							<li><a href="#">Kids</a></li>
+							{% if not current_user.is_authenticated: %}
+							<li><a href="{{url_for('signup')}}">Login/Signup</a></li>
+							{% else: %}
+							 <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+							{% endif %}
+						</ul>
+					</nav>
+</div>
+
+
+
+
+
+		<!-- Scripts -->
+			<script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+		<script src="{{url_for('static',filename='js/browser.min.js')}}"></script>
+		<script src="{{url_for('static',filename='js/breakpoints.min.js')}}"></script>
+		<script src="{{url_for('static',filename='js/util.js')}}"></script>
+		<script src="{{url_for('static',filename='js/main.js')}}"></script>
+		<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+
+<form action="{{url_for('cart', p_id=id.p_id) }}" method="POST">
+  <div class="product">
+
+      <img src={{id.p_image}} alt="Product Image">
+    <div class="product-details">
+      <h1 class="product-name">{{id.category}}-{{id.p_id}}</h1>
+      <p class="product-price">MRP ₹{{id.price}}</p>
+      <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel turpis et justo fermentum venenatis vel non nisi.</p>
+      <ul class="product-specs">
+        <li>Color: Black</li>
+        <li>Size: Medium</li>
+        <li>Material: Cotton</li>
+      </ul>
+       <input type="submit" value="BuyNow" />
+    </div>
+  </div>
+  </form>
+
+</body>
+</html>

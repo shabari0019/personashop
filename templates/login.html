@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>PersonaShop</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+       <link rel="stylesheet" href="{{url_for('static',filename='css/style-login.css')}}" />
+
+
+    <script src="../custom-scripts.js" defer></script>
+  </head>
+  <body>
+
+
+
+
+    <section class="wrapper">
+      <div class="form signup">
+        <header>Signup</header>
+        <form action="/process" method="POST" enctype="multipart/form-data">
+          <input type="text"  name = "name" id ="name" placeholder="Full name" required />
+          <input type="text" name = "email" id = "email" placeholder="Email address" required />
+          <input type="password" name = "password" id = "password" placeholder="Password" required />
+            Profile Photo:<input type="file" id="photo" name="photo" accept="image/*" required>
+          <input type="submit" value="Signup" />
+        </form>
+      </div>
+
+      <div class="form login">
+        <header>Login</header>
+        <form action="/login" method="POST">
+          <input type="text" id = "l-email" name ="l-email" placeholder="Email address" required />
+          <input type="password" id = "l-password" name = "l-password" placeholder="Password" required />
+
+          <a href="#">Forgot password?</a>
+          <input type="submit" value="Login" />
+        </form>
+      </div>
+
+      <script>
+        const wrapper = document.querySelector(".wrapper"),
+          signupHeader = document.querySelector(".signup header"),
+          loginHeader = document.querySelector(".login header");
+
+        loginHeader.addEventListener("click", () => {
+          wrapper.classList.add("active");
+        });
+        signupHeader.addEventListener("click", () => {
+          wrapper.classList.remove("active");
+        });
+      </script>
+    </section>
+  </body>
+</html>

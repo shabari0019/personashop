@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>PersonaShop</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+		<noscript><link rel="stylesheet" href="{{url_for('static',filename='css/noscript.css')}}" /></noscript>
+		<link rel="stylesheet" href="{{ url_for('static',filename='css/main.css')}}" />
+      <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+
+  .product {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    margin: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .product img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 20px;
+  }
+
+  .product-info {
+    flex: 1;
+  }
+
+  .product-price {
+    font-weight: bold;
+    color: #e74c3c;
+  }
+
+  .sold-units {
+    color: #555;
+  }
+</style>
+</head>
+<body>
+
+
+<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+                        <div class="inner">
+
+                        <a href="index.html" class="logo">
+									<span class="symbol"><img src="{{ url_for('static',filename='images/shopping.svg')}}" alt="" /></span><span class="title">PersonaShop</span>
+								</a>
+                      <nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+                            </div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="{{url_for('home')}}">Home</a></li>
+							<li><a href="{{url_for('display',name = 'Male')}}">Men</a></li>
+							<li><a href="{{url_for('display',name = 'Female')}}">Women</a></li>
+							<li><a href="#">Kids</a></li>
+							{% if not current_user.is_authenticated: %}
+							<li><a href="{{url_for('signup')}}">Login/Signup</a></li>
+							{% else: %}
+							 <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+							{% endif %}
+						</ul>
+					</nav>
+</div>
+
+
+
+
+
+		<!-- Scripts -->
+			<script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+		<script src="{{url_for('static',filename='js/browser.min.js')}}"></script>
+		<script src="{{url_for('static',filename='js/breakpoints.min.js')}}"></script>
+		<script src="{{url_for('static',filename='js/util.js')}}"></script>
+		<script src="{{url_for('static',filename='js/main.js')}}"></script>
+		<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+{% for item in items %}
+  <div class="product">
+
+	  <a href="{{ url_for('show_product', p_id=item.p_id) }}"> <img src={{item.p_image}}></a>
+
+    <div class="product-info">
+      <h2>{{item.category}}-{{item.p_id}}</h2>
+      <p class="product-price">MRP ₹{{item.price}}</p>
+      <p class="sold-units">Sold Units: {{item.sales}}</p>
+    </div>
+
+  </div>
+{% endfor %}
+
+</body>
+</html>
